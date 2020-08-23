@@ -17,13 +17,14 @@ namespace Progresi
             
             for (int i = 0; i < namber.Length - 2; i++)
             {
-                int sum = namber[i] + namber[i + 2];
-                int mult = namber[i] * namber[i + 2];
+                double sum = namber[i] + namber[i + 2];             
+                double mult = namber[i] * namber[i + 2];
+              
                 if (sum / 2 == namber[i + 1])
                 {
                     arifme++;
                 }
-                else if (mult == namber[i + 1] * namber[i + 1] && namber[i] != namber[i + 1] && namber[i] != namber[i + 2])
+                else if (mult == namber[i + 1] * namber[i + 1] && mult != 0)
                 {
                     geome++;
                 }
@@ -47,7 +48,7 @@ namespace Progresi
         }
         static void Main(string[] args)
         {
-            string m = Progresi(1,2,4);
+            string m = Progresi(0,0,0,0);
             Console.WriteLine(m);
         }
     }
