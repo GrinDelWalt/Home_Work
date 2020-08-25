@@ -48,7 +48,7 @@ namespace Progresi
         }
         static void Main(string[] args)
         {
-            string m = Progresi(0,0,0,0);
+            string m = Progresi(2,4,8,14);
             Console.WriteLine(m);
         }
     }
