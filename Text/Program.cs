@@ -39,7 +39,7 @@ namespace Text
         /// </summary>
         /// <param name="n"></param>
         /// <returns></returns>
-        static string MaxWord(string n)
+        static string[] MaxWord(string n)
         {
             string[] words = SeporatorsText(n);
             int d = 0;
@@ -80,8 +80,7 @@ namespace Text
                 int a = count[i];
                 word[i] = words[a];
             }
-            string tempWord = String.Join(" ", word);
-            return tempWord;
+            return word;
         }
       
         static void Main(string[] args)
