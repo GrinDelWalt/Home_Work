@@ -142,11 +142,12 @@ namespace Home_Warke
 
             int stolb = matrix.GetLength(0);
             int stroka = matrix.GetLength(1);
+            int stroka2 = matrix2.GetLength(1);
             int[,] matrixResult = new int[stolb, stroka];
 
             for (int i = 0; i < stolb; i++)
             {
-                for (int d = 0; d < stroka; d++)
+                for (int d = 0; d < stroka2; d++)
                 {
                     for (int p = 0; p < stroka; p++)
                     {
@@ -163,7 +164,8 @@ namespace Home_Warke
             int[,] resultMatrix = MatrixMultNumb(RecMatrix(3, 2), 4);
             int[,] resultMatrix2 = MatrixEd(resultMatrix, RecMatrix(3, 2));
             int[,] resultMatrix3 = MatrixSub(resultMatrix2, RecMatrix(3, 2));
-            ChekMatrix(resultMatrix, resultMatrix2);
+            ChekMatrix(RecMatrix(3, 5), RecMatrix(2, 3));
+            Console.ReadKey();
             MatrixMult(RecMatrix(3, 5), RecMatrix(2, 3));
             PrintMatrix(resultMatrix2);
 
