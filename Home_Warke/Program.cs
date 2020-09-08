@@ -13,13 +13,20 @@ namespace Home_Warke
         /// <returns></returns>
         static void PrintMatrix(int[,] matrix)
         {
-            for (int i = 0; i < matrix.GetLength(0); i++)
+            if (matrix != null)
             {
-                for (int d = 0; d < matrix.GetLength(1); d++)
+                for (int i = 0; i < matrix.GetLength(0); i++)
                 {
-                    Console.Write($"{matrix[i, d]}  ");
+                    for (int d = 0; d < matrix.GetLength(1); d++)
+                    {
+                        Console.Write($"{matrix[i, d]}  ");
+                    }
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
+            }
+            else
+            {
+                Console.WriteLine("Невозможно вычислить");
             }
             
         }
@@ -61,17 +68,24 @@ namespace Home_Warke
         /// <param name="matrix2"></количество строк>
         static void ChekMatrix(int[,] matrix, int[,] matrix2)
         {
-            if (matrix.GetLength(0) == matrix2.GetLength(0) && matrix.GetLength(1) == matrix2.GetLength(1))
+            if (matrix != null & matrix2 != null)
             {
-                Console.WriteLine("матрицы равноразмерные");
-            }
-            else if (matrix.GetLength(1) == matrix2.GetLength(0))
-            {
-                Console.WriteLine("матрицы согласованны");
+                if (matrix.GetLength(0) == matrix2.GetLength(0) && matrix.GetLength(1) == matrix2.GetLength(1))
+                {
+                    Console.WriteLine("матрицы равноразмерные");
+                }
+                else if (matrix.GetLength(1) == matrix2.GetLength(0))
+                {
+                    Console.WriteLine("матрицы согласованны");
+                }
+                else
+                {
+                    Console.WriteLine("матрицы подходят только для умножения на число");
+                }
             }
             else
             {
-                Console.WriteLine("матрицы подходят только для умножения на число");
+                Console.WriteLine("в предыдущих действиях допущена ошибка");
             }
         }
         /// <summary>
@@ -82,53 +96,86 @@ namespace Home_Warke
         /// <param name="m"></Число>
         static int[,] MatrixMultNumb(int[,] matrix, int m)
         {
-            int stolb = matrix.GetLength(0);
-            int stroka = matrix.GetLength(1);
-            int[,] resultMatrix = new int[stolb, stroka];
-            for (int i = 0; i < stolb; i++)
+            if (matrix != null)
             {
-                for (int d = 0; d < stroka; d++)
+                int stolb = matrix.GetLength(0);
+                int stroka = matrix.GetLength(1);
+                int[,] resultMatrix = new int[stolb, stroka];
+                for (int i = 0; i < stolb; i++)
                 {
-                    resultMatrix[i,d] = matrix[i, d] * m;
+                    for (int d = 0; d < stroka; d++)
+                    {
+                        resultMatrix[i, d] = matrix[i, d] * m;
+                    }
                 }
+                return resultMatrix;
             }
-            return resultMatrix;
+            else
+            {
+                return null;
+            }
         }
         /// <summary>
         /// Сложение матриц
         /// </summary>
         static int[,] MatrixEd(int[,] matrix, int[,] matrix2)
         {
-            int stolb = matrix.GetLength(0);
-            int stroka = matrix.GetLength(1);
-            int[,] resultMatrix = new int[stolb, stroka];
-            for (int i = 0; i < stolb; i++)
+            if (matrix != null & matrix2 != null)
             {
-                for (int d = 0; d < stroka; d++)
+                int stolb = matrix.GetLength(0);
+                int stroka = matrix.GetLength(1);
+                int[,] resultMatrix = new int[stolb, stroka];
+                if (stolb == matrix2.GetLength(0) & stroka == matrix2.GetLength(1))
                 {
-                    resultMatrix[i, d] = matrix[i, d] + matrix2[i, d];
+                    for (int i = 0; i < stolb; i++)
+                    {
+                        for (int d = 0; d < stroka; d++)
+                        {
+                            resultMatrix[i, d] = matrix[i, d] + matrix2[i, d];
+                        }
+                    }
+                    return resultMatrix;
+                }
+                else
+                {
+                    return null;
                 }
             }
-            
-            return resultMatrix;
+            else
+            {
+                return null;
+            }
         }
         /// <summary>
         /// Вычитание матриц
         /// </summary>
         static int[,] MatrixSub(int[,] matrix, int[,] matrix2)
         {
-            int stolb = matrix.GetLength(0);
-            int stroka = matrix.GetLength(1);
-            int[,] resultMatrix = new int[stolb, stroka];
-            for (int i = 0; i < stolb; i++)
+            if (matrix != null & matrix2 != null)
             {
-                for (int d = 0; d < stroka; d++)
+                int stolb = matrix.GetLength(0);
+                int stroka = matrix.GetLength(1);
+                int[,] resultMatrix = new int[stolb, stroka];
+                if (stolb == matrix2.GetLength(0) & stroka == matrix2.GetLength(1))
                 {
-                    resultMatrix[i, d] = matrix[i, d] - matrix2[i, d];
+                    for (int i = 0; i < stolb; i++)
+                    {
+                        for (int d = 0; d < stroka; d++)
+                        {
+                            resultMatrix[i, d] = matrix[i, d] - matrix2[i, d];
+                        }
+                    }
+                    return resultMatrix;
+                }
+                else
+                {
+                    return null;
                 }
             }
-
-            return resultMatrix;
+            else
+            {
+                return null;
+            }
         }
         /// <summary>
         /// Метод перемножения матриц
@@ -139,41 +186,42 @@ namespace Home_Warke
         /// <returns></returns>
         static int[,] MatrixMult(int[,] matrix, int[,] matrix2)
         {
-            int stolb2 = matrix2.GetLength(1);
-            int stolb = matrix.GetLength(1);
-            int stroka = matrix.GetLength(0);
-            int stroka2 = matrix2.GetLength(0);
-            int[,] matrixResult = new int[stroka, stolb2];
-            int[,] nullMatrix = new int[1, 1];
-            if (stolb == stroka2)
+            if (matrix != null & matrix2 != null)
             {
-                for (int i = 0; i < stroka; i++)
+                int stolb2 = matrix2.GetLength(1);
+                int stolb = matrix.GetLength(1);
+                int stroka = matrix.GetLength(0);
+                int stroka2 = matrix2.GetLength(0);
+                int[,] matrixResult = new int[stroka, stolb2];
+
+                if (stolb == stroka2)
                 {
-                    for (int d = 0; d < stolb2; d++)
+                    for (int i = 0; i < stroka; i++)
                     {
-                        for (int p = 0; p < stolb; p++)
+                        for (int d = 0; d < stolb2; d++)
                         {
-                            matrixResult[i, d] += matrix[i, p] * matrix2[p, d];
+                            for (int p = 0; p < stolb; p++)
+                            {
+                                matrixResult[i, d] += matrix[i, p] * matrix2[p, d];
+                            }
                         }
                     }
+                    return matrixResult;
                 }
-                return matrixResult;
+                else
+                {
+                    return null;
+                }
             }
             else
             {
-                return nullMatrix;
+                return null;
             }
         }
 
         static void Main()
         {
-            //int[,] resultMatrix = MatrixMultNumb(RecMatrix(3, 2), 4);
-            //int[,] resultMatrix2 = MatrixEd(resultMatrix, RecMatrix(3, 2));
-            //int[,] resultMatrix3 = MatrixSub(resultMatrix2, RecMatrix(3, 2));
-            //ChekMatrix(RecMatrix(3, 5), RecMatrix(2, 3));
-            //Console.ReadKey();
-            //MatrixMult(RecMatrix(3, 5), RecMatrix(2, 3));
-            //PrintMatrix(resultMatrix2);
+            
             int[,] r1 = RecMatrix(2, 1);
             int[,] r2 = RecMatrix(1, 3);
             PrintMatrix(r1);
@@ -182,7 +230,11 @@ namespace Home_Warke
             ChekMatrix(r1, r2);
             int[,] r3 = MatrixMult(r1, r2);
             Console.WriteLine();
-            PrintMatrix(r3);
+            int[,] r4 = MatrixEd(r3, r1);
+            PrintMatrix(MatrixSub(r3, r4));
+            PrintMatrix(MatrixMultNumb(r3, 2));
+            ChekMatrix(r3, r2);
+            PrintMatrix(r4);
         }
     }
 }
